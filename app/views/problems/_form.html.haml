@@ -1,16 +1,16 @@
 = form_for @problem, :html => { :class => 'form-horizontal' } do |f|
   .control-group
-    = f.label :name, :class => 'control-label'
+    = label :name, :name, :class => 'control-label'
     .controls
-      = f.text_field :name, :class => 'text_field'
+      = text_field_tag :name, "", :class => 'text_field'
   .control-group
-    = f.label :start_time, :class => 'control-label'
+    = label :start_time, :start_time, :class => 'control-label'
     .controls
-      = f.text_field :start_time, :class => 'text_field'
+      = datetime_local_field_tag :start_time, :class => 'datetime_field'
   .control-group
-    = f.label :end_time, :class => 'control-label'
+    = label :end_time, :end_time, :class => 'control-label'
     .controls
-      = f.text_field :end_time, :class => 'text_field'
+      = datetime_local_field_tag :end_time, :class => 'datetime_field'
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
+    = submit_tag nil, :class => 'btn btn-primary', data: { confirm: "Are you sure?" }
     = link_to t('.cancel', :default => t("helpers.links.cancel")), problems_path, :class => 'btn'

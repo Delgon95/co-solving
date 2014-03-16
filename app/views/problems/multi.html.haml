@@ -1,0 +1,20 @@
+- model_class = Problem
+.page-header
+  %h1=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.pluralize.titleize
+
+= form_tag create_multi_problems_path, method: :post, class: 'form-horizontal' do |f|
+  .control-group
+    = label :name, :quantity, :class => 'control-label'
+    .controls
+      = text_field_tag :quantity, "", class: :text_field
+  .control-group
+    = label :start_time, :start_time, :class => 'control-label'
+    .controls
+      = datetime_local_field_tag :start_time, class: :datetime_field
+  .control-group
+    = label :end_time, :end_time, :class => 'control-label'
+    .controls
+      = datetime_local_field_tag :end_time, class: :datetime_field
+  .form-actions
+    = submit_tag :Create, :class => 'btn btn-primary', data: { confirm: "Are you sure?" }
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), problems_path, :class => 'btn'

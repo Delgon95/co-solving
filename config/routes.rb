@@ -1,7 +1,11 @@
 Cosolving::Application.routes.draw do
-  resources :problems
+  resources :problems do
+    collection do
+      get :multi
+      post :create_multi
+    end
+  end
   root 'problems#index'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
