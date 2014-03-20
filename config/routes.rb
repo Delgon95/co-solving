@@ -1,4 +1,5 @@
 Cosolving::Application.routes.draw do
+  devise_for :users
   resources :problems do
     collection do
       get :multi

@@ -20,6 +20,8 @@ gem "therubyracer"
 gem "twitter-bootstrap-rails"
 gem "haml-rails"
 
+gem 'devise'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
