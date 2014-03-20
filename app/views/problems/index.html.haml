@@ -1,24 +1,51 @@
+:javascript
+  dupa=1;
+
 - model_class = Problem
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1 Tydzień 1
 %table.table.table-striped
   %thead
     %tr
-      -# %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
-      -# %th= model_class.human_attribute_name(:created_at)
+      %th= model_class.human_attribute_name(:solving)
+      %th Actions
       - if is_admin?
-        %th=t '.actions', :default => t("helpers.actions")
+        %th admin
   %tbody
     - @problems.each do |problem|
       %tr
-        -# %td= link_to problem.id, problem_path(problem)
-        %td= link_to problem.name, problem_path(problem)
-        -# %td=l problem.created_at
+        %td= problem.name
+        %td
+          - unless @solvings[problem.id].nil?
+            - @solvings[problem.id].each do |solving|
+              = render 'badge', solving: solving
+
+        - if problem.user_status(current_user_id) == "untouched"
+          %td= link_to "Start", start_problem_path(problem), method: :put, class: 'btn btn-info btn-mini'
+        - elsif problem.user_status(current_user_id) == "solving"
+          %td
+            = link_to "Finish", finish_problem_path(problem), method: :put, class: 'btn btn-success btn-mini'
+            = link_to "Abandon", abandon_problem_path(problem), method: :put, class: 'btn btn-danger btn-mini'
+        - elsif problem.user_status(current_user_id) == "finished"
+          %td= link_to "Resolve?", re_solve_problem_path(problem), method: :put, class: 'btn btn-info btn-mini'
+        - elsif problem.user_status(current_user_id) == "abandoned"
+          %td= link_to "Try again", re_solve_problem_path(problem), method: :put, class: 'btn btn-info btn-mini'
+
         - if is_admin?
           %td
             = link_to t('.destroy', :default => t("helpers.links.destroy")), problem_path(problem), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_problem_path(problem), :class => 'btn btn-mini'
+%br
+%br
+Legend:
+.badge.label-info Solving
+.badge.label-success Finished
+.badge.label-important Abandoned
+%br
+%br
+%br
+
 - if is_admin?
-  = link_to t('.new', :default => t("helpers.links.new")), new_problem_path, :class => 'btn btn-primary'
-  = link_to t('.multi', :default => t("helpers.links.multi")), multi_problems_path, :class => 'btn btn-primary'
+  = link_to t('.new', :default => t("helpers.links.new")), new_problem_path, :class => 'btn btn-mini'
+  = link_to t('.multi', :default => t("helpers.links.multi")), multi_problems_path, :class => 'btn btn-mini'

@@ -5,6 +5,12 @@ Cosolving::Application.routes.draw do
       get :multi
       post :create_multi
     end
+    member do
+      put :start
+      put :abandon
+      put :finish
+      put :re_solve
+    end
   end
   root 'problems#index'
 

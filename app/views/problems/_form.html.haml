@@ -1,4 +1,6 @@
 = form_for @problem, :html => { :class => 'form-horizontal' } do |f|
+  = render 'shared/form_errors', object: @problem
+
   .control-group
     = label :name, :name, :class => 'control-label'
     .controls
