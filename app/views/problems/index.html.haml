@@ -1,5 +1,5 @@
 :javascript
-  dupa=1;
+  var dupa=1;
 
 - model_class = Problem
 .page-header
@@ -26,7 +26,7 @@
         - elsif problem.user_status(current_user_id) == "solving"
           %td
             = link_to "Finish", finish_problem_path(problem), method: :put, class: 'btn btn-success btn-mini'
-            = link_to "Abandon", abandon_problem_path(problem), method: :put, class: 'btn btn-danger btn-mini'
+            = link_to "Abandon", abandon_problem_path(problem), method: :put, class: 'btn btn btn-mini'
         - elsif problem.user_status(current_user_id) == "finished"
           %td= link_to "Resolve?", re_solve_problem_path(problem), method: :put, class: 'btn btn-info btn-mini'
         - elsif problem.user_status(current_user_id) == "abandoned"
@@ -41,7 +41,7 @@
 Legend:
 .badge.label-info Solving
 .badge.label-success Finished
-.badge.label-important Abandoned
+.badge.label Abandoned
 %br
 %br
 %br

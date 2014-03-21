@@ -78,7 +78,7 @@ class ProblemsController < ApplicationController
   private
 
   def update_solving_status status
-    if @solving and @solving.status.to_sym == :solving
+    if @solving
       @solving.update(status: status)
       redirect_to problems_path
     else

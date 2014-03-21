@@ -11,6 +11,6 @@ $ ->
     $(document).ready( ->
       setTimeout( ->
         window.location.reload()
-      , 10000)
+      , 15000)
     )
 

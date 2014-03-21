@@ -2,6 +2,6 @@
 - if solving.status == "finished"
   .badge.label-success #{solving.user.nickname}
 - elsif solving.status == "abandoned"
-  .badge.label-important #{solving.user.nickname}
+  .badge.label #{solving.user.nickname}
 - elsif solving.status == "solving"
   .badge.label-info #{solving.user.nickname} (since #{humanize Time.now - solving.updated_at})
